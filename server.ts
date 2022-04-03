@@ -12,26 +12,28 @@ const makeContract = require('truffle-contract');
 import userDataContractJson from './build/contracts/UserData.json';
 
 async function startServer() {
-    console.log('starting server 1')
+    // Create react server with express and cors 
     const app = express();
     app.use(express.json());
     app.use(cors({
         origin: '*'
     }));
 
+    // Get the contract instance from the json file
     const UserDataContract = makeContract(userDataContractJson);
     UserDataContract.setProvider(web3.currentProvider);
-
-    const accounts = await web3.eth.getAccounts();
-    
-    console.log(accounts);
-
     const userDataInstance = await UserDataContract.deployed();
 
-    const testAddress = accounts[0];
+    const accounts = await web3.eth.getAccounts();
+    console.log(`Accounts: `, accounts);
+    
+    // Add the routes to the server
+    routes(app, userDataInstance);
 
-    routes(app, userDataInstance, testAddress);
+    const lastBlockNb = await web3.eth.getBlockNumber();
+    console.log(`Last block number: ${lastBlockNb}`);
 
+    // Start the server
     app.listen(process.env.PORT || 8082, () => {
         console.log(`listening on port ${process.env.PORT || 8082} `);
     })

@@ -29,5 +29,10 @@ Requirements:
 4. Run `yarn migrate`
 5. Run `yarn start` and you're good to go!
 
+
+#### Testing the backend (unit test)
+1. If not already done, compíle contracts with `truffle compile`
+2. Run `yarn test`
+
 ### Frontend
 // TODO
