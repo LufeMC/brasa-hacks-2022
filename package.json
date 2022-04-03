@@ -4,8 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "compile-contracts": "rm -rf build/contracts && truffle compile",
+    "generate-types": "rm -rf ./types && yarn compile-contracts && typechain --target=truffle-v5 'build/contracts/*.json'",
+    "generate-migrations": "rm -rf ./migrations && tsc -p ./tsconfig.migrate.json --outDir ./migrations",
+    "migrate": "yarn compile-contracts && yarn generate-migrations && truffle migrate --reset",
+    "typecheck": "yarn generate-types && tsc --noEmit",
+    "test": "yarn generate-migrations && truffle test",
+    "start": "tsc && node ./dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +31,23 @@
     "shortid": "^2.2.16",
     "truffle-contract": "^4.0.31",
     "truffle-hdwallet-provider": "^1.0.17",
-    "web3": "^1.7.1"
+    "web3": "^1.7.1",
+    "web3-core": "^1",
+    "web3-eth-contract": "^1",
+    "web3-utils": "^1"
+  },
+  "devDependencies": {
+    "@truffle/contract": "^4.5.3",
+    "@truffle/contract-schema": "^3.4.6",
+    "@typechain/truffle-v5": "^8.0.0",
+    "@types/bn.js": "^4.11.6",
+    "@types/chai": "^4.2.11",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/mocha": "^7.0.2",
+    "@types/web3": "^1.2.2",
+    "typechain": "^8.0.0",
+    "truffle-typings": "^1.0.8"
   }
+
 }
