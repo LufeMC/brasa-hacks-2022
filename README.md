@@ -1,6 +1,6 @@
 # Hackathon - Brasa Hacks 2022: our solution
 
-## Team 4: Bradu Retumbante
+## Team 4: Brado Retumbante
 - Felipe Bandeira Ramos
 - Luis Fernando Monteiro Cerqueira
 - Nicole Batista Dantas
