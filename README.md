@@ -35,4 +35,4 @@ Requirements:
 2. Run `yarn test`
 
 ### Frontend
-// TODO
+Access https://github.com/BioGuerraIT/Brasa_Hacks_React_Native to check out our front-end!
